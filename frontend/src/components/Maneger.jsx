@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
+import StickyThing from "./stickyThing";
 
 const Maneger = () => {
   const [form, setForm] = useState({ site: "", username: "", password: "" });
@@ -52,9 +53,12 @@ const copyText = (text)=>{
 }
 
 const deletePassword=(id)=>{
-  const newArr = passwords.filter(item=>item.id != id)
-  setPasswords(newArr)
-  localStorage.setItem("password", JSON.stringify(newArr));
+  if(confirm("Are you sure you want to delete")){
+    const newArr = passwords.filter(item=>item.id != id)
+    setPasswords(newArr)
+    localStorage.setItem("password", JSON.stringify(newArr));
+
+  }
 }
 const editPassword=(id)=>{
   const EditItem = passwords.filter(item=>item.id == id)
@@ -87,6 +91,7 @@ const filterResults = (e)=>{
       <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
         <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-green-400 opacity-20 blur-[100px]"></div>
       </div>
+        <StickyThing/>
       <div className=" mycontainer md:px-40 min-h-[78.1vh]">
         <h1 className="text-center  text-4xl font-bold">
         
@@ -180,7 +185,7 @@ const filterResults = (e)=>{
                 {searchRef.current.value =="" ?passwords?.map((item) => (
                   <tr key={item.id}>
                     <td className=" text-center py-2 border border-white ">
-                      <div className="flex justify-center items-center text-xs md:text-sm gap-1 md:gap-3">
+                      <div className="flex flex-col md:flex-row justify-center items-center text-xs md:text-sm gap-1 md:gap-3">
                         <a href={item.site} target="_blank">
                           {item.site}
                         </a>
@@ -194,7 +199,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className=" text-center py-2 border border-white ">
-                      <div className=" flex justify-center items-center gap-1 md:gap-3">
+                      <div className=" flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                         <span>{item.username}</span>
                         <img
                           src="icons/copy.png"
@@ -206,7 +211,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className="text-center py-2 border border-white ">
-                      <div className=" flex justify-center items-center gap-1 md:gap-3">
+                      <div className=" flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                         <span> {item.password}</span>
                         <img
                           src="icons/copy.png"
@@ -218,7 +223,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className=" text-center py-2 border border-white ">
-                      <div className="flex justify-center items-center gap-1 md:gap-3">
+                      <div className="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                       <img
                           src="icons/edit.png"
                           width={24}
@@ -240,7 +245,7 @@ const filterResults = (e)=>{
                 searchResults?.map((item) => (
                   <tr key={item.id}>
                     <td className=" text-center py-2 border border-white ">
-                      <div className="flex justify-center items-center text-xs md:text-sm gap-1 md:gap-3">
+                      <div className="flex flex-col md:flex-row justify-center items-center text-xs md:text-sm gap-1 md:gap-3">
                         <a href={item.site} target="_blank">
                           {item.site}
                         </a>
@@ -254,7 +259,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className=" text-center py-2 border border-white ">
-                      <div className=" flex justify-center items-center gap-1 md:gap-3">
+                      <div className=" flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                         <span>{item.username}</span>
                         <img
                           src="icons/copy.png"
@@ -266,7 +271,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className="text-center py-2 border border-white ">
-                      <div className=" flex justify-center items-center gap-1 md:gap-3">
+                      <div className=" flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                         <span> {item.password}</span>
                         <img
                           src="icons/copy.png"
@@ -278,7 +283,7 @@ const filterResults = (e)=>{
                       </div>
                     </td>
                     <td className=" text-center py-2 border border-white ">
-                      <div className="flex justify-center items-center gap-1 md:gap-3">
+                      <div className="flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
                       <img
                           src="icons/edit.png"
                           width={24}
@@ -303,7 +308,7 @@ const filterResults = (e)=>{
             
         
             ):    <div className="text-lg md:text-3xl font-bold text-green-800   p-4">
-            No passwords to Show
+            Save passwords will appear here
           </div>}
           </div>
       </div>
