@@ -4,7 +4,7 @@ import { toast } from "react-hot-toast";
 const sendFeedBack =async (name, message)=>{
 try {
 
-    const res = await fetch(`${import.meta.env.VITE_URL}/feedback/sendfeedback`, {
+    const res = await fetch(`api/v1/feedback/sendfeedback`, {
         method: "POST",
    
         headers: { "Content-Type": "application/json" },
@@ -31,7 +31,7 @@ try {
 
 const getFeedBack = async ()=>{
   try {
-    const res = await fetch(`/api/feedback/getfeedback`)
+    const res = await fetch(`/api/v1/feedback/getfeedback`)
     const data = await res.json();
 
       if(data.success == 400){
