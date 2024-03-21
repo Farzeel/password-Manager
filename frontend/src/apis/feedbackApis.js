@@ -31,7 +31,7 @@ try {
 
 const getFeedBack = async ()=>{
   try {
-    const res = await fetch(`${import.meta.env.VITE_URL}/feedback/getfeedback`)
+    const res = await fetch(`/api/feedback/getfeedback`)
     const data = await res.json();
 
       if(data.success == 400){
