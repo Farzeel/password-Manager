@@ -1,6 +1,6 @@
 import cron from "cron"
 import https from "https"
-const URL = "https://chat-app-7z5k.onrender.com";
+const URL = "https://password-manager-un4h.onrender.com";
 
 const job = new cron.CronJob("*/14 * * * *", function () {
 	https

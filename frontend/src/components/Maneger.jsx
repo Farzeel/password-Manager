@@ -40,7 +40,7 @@ const Maneger = () => {
     }
     setPasswords([...passwords, {...form, id:uuidv4()}]);
     localStorage.setItem("password", JSON.stringify([...passwords, {...form, id:uuidv4()}]));
-    console.log([...passwords, {...form, id:uuidv4()}]);
+   setForm({site:"" , password:""  , username:""})
   };
 
   const handleChange = (e) => {
