@@ -4,6 +4,8 @@ import { getFeedBack } from "../apis/feedbackApis";
 import { toast } from "react-hot-toast";
 import {  useNavigate } from "react-router-dom";
 import StickyThing2 from "../components/StickyThing2";
+import Skeleton from "../components/skeleton";
+
 
 
 
@@ -11,10 +13,12 @@ const ShowFeedBack = () => {
     const navigate = useNavigate()
   const [messageArray, setMessageArray] = useState([]);
   const [showMore, setShowMore] = useState(false);
+  const [loading , setloading] = useState(false)
 
   useEffect( () => {
       const fnc = async ()=>{
         try {
+            setloading(true)
             const res =  await getFeedBack()
             if(res.success ==200){
 
@@ -28,6 +32,8 @@ const ShowFeedBack = () => {
             }
         } catch (error) {
           toast.error(error.message)
+        }finally{
+            setloading(false)
         }
       }
       fnc()
@@ -43,8 +49,9 @@ const ShowFeedBack = () => {
   };
   return (
       <div className="mycontainer md:px-40 min-h-[73.5vh]">
+        {loading && <><Skeleton/><Skeleton/></>}
         <StickyThing2/>
-      {messageArray.length > 0 ? (
+      {(!loading &&messageArray.length > 0 )? (
         <table className="table-auto w-full rounded-md overflow-hidden">
           <thead className="bg-green-800 text-white">
             <tr>
@@ -94,8 +101,10 @@ const ShowFeedBack = () => {
             ))}
           </tbody>
         </table>
-      ) : (
-        <div className="text-lg md:text-3xl font-bold text-green-800 p-4">
+      ) : 
+      <>
+    
+        {!loading && <div className="text-lg md:text-3xl font-bold text-green-800 p-4">
           No Feedback to show. Your FeedBack will appear here.
           <button onClick={()=>navigate("/feedback")} className="flex mt-2 justify-center items-center gap-2  border border-green-500 border-b-4   rounded-full w-fit px-4 py-2 hover:bg-green-300 active:border-b-2 ">
             <img
@@ -105,8 +114,9 @@ const ShowFeedBack = () => {
             />
             <span className="font-bold text-black ">Give Feedback</span>
           </button>
-        </div>
-      )}
+        </div>}
+        </>
+      }
     </div>
   );
 };
