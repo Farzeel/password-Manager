@@ -18,6 +18,7 @@ app.use(cors({
 }))
 app.use(express.json({limit:"16kb"}));
 app.use(express.static("public"))
+job.start()
 
 
 connectDb().then(()=>{
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
 // ROUTES IMPORT
 import feedbackRoute from "./src/routes/feedback.routes.js";
+import { job } from "./cron.js";
 
 
 
