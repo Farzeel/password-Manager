@@ -212,7 +212,7 @@ const filterResults = (e)=>{
                     </td>
                     <td className="text-center py-2 border border-white ">
                       <div className=" flex flex-col md:flex-row justify-center items-center gap-1 md:gap-3">
-                        <span> {item.password}</span>
+                        <span> {"*".repeat(item.password.length) }</span>
                         <img
                           src="icons/copy.png"
                           width={16}
